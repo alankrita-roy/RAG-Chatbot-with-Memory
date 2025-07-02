@@ -67,7 +67,7 @@ if uploaded_files:
             continue #skip this file
         all_docs.extend(docs)
                 
-     if not all_docs:
+    if not all_docs:
             st.warning("No valid text found in any of the uploaded PDF")
             st.stop()
 
