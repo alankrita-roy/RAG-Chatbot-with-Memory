@@ -64,7 +64,7 @@ if uploaded_files:
 
         if not docs or all(not doc.page_content.strip() for doc in docs):
             st.error(f"No text found in {uploaded_file.name}. Please upload a valid PDF")
-            continue (#skip this file)
+            continue #skip this file
         all_docs.extend(docs)
                 
      if not all_docs:
