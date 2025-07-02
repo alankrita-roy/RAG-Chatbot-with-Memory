@@ -111,17 +111,7 @@ if uploaded_files:
             config={"configurable": {"session_id": session_id}}
         )
         st.markdown("**Assistant:** " + result["answer"])
-        st.subheader("Chat History:")
-
-    if chat_history:
-        history_text = ""
-        for msg in chat_history:
-            role = "You" if msg["role"] == "user" else "Assistant"
-            history_text += f"{role}: {msg['message']}\n\n"
-
-        st.code(history_text.strip(), language="text")  # Looks like a code block
-    else:
-        st.info("No chat history yet.")
+        st.write("Chat History:", chat_history.messages)
 
     # Clean up files after processing
     for path in saved_file_paths:
