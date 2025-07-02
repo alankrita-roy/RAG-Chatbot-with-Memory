@@ -32,7 +32,7 @@ llm = ChatGroq(groq_api_key=GROQ_API_KEY, model_name="Gemma2-9b-It")
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # Streamlit UI
-st.title("Conversational RAG with PDF Uploads (Streamlit Cloud)")
+st.title("Conversational RAG with PDF Upload")
 st.write("Upload PDFs and ask questions about their content.")
 
 # Session ID management
@@ -111,10 +111,10 @@ if uploaded_files:
             config={"configurable": {"session_id": session_id}}
         )
         st.markdown("**Assistant:** " + result["answer"])
-        st.markdown("**Chat History:**")
+        st.markdown("*Chat History:*")
         for msg in chat_history.messages:
-            role = "🧑 You" if msg.type == "human" else "🤖 Assistant"
-            st.markdown(f"**{role}:** {msg.content}")
+            role = "You" if msg.type == "human" else "Assistant"
+            st.markdown(f"*{role}: {msg.content}*")
 
     # Clean up files after processing
     for path in saved_file_paths:
