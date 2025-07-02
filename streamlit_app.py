@@ -15,7 +15,7 @@ from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -59,7 +59,7 @@ if uploaded_files:
     for uploaded_file in uploaded_files:
         file_path = save_uploaded_file(uploaded_file)
         saved_file_paths.append(file_path)
-        loader = PyPDFLoader(file_path)
+        loader = PyMuPDFLoader(file_path)
         docs=loader.load()
 
         if not docs or all(not doc.page_content.strip() for doc in docs):
