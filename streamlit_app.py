@@ -3,6 +3,12 @@ import re
 import uuid
 import streamlit as st
 
+# ---- PATCH for ChromaDB: Fix sqlite3 version ----
+import sys
+os.environ["PYSQLITE3_INCLUDE_PATH"] = "/home/adminuser/venv/lib/python3.10/site-packages/pysqlite3"
+import pysqlite3
+sys.modules["sqlite3"] = pysqlite3
+
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.chat_history import BaseChatMessageHistory
