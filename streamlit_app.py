@@ -60,7 +60,16 @@ if uploaded_files:
         file_path = save_uploaded_file(uploaded_file)
         saved_file_paths.append(file_path)
         loader = PyPDFLoader(file_path)
+        docs=loader.load()
+
+        if not docs or all(not doc.page_content.strip() for doc in docs):
+            st.error(f"No text found in {uploaded_file.name}. Please upload a valid PDF")
+            continue (#skip this file)
         all_docs.extend(loader.load())
+                
+     if not all_docs:
+            st.warning("No valid text found in any of the uploaded PDF")
+            st.stop()
 
     # Split and embed documents 
     splitter = RecursiveCharacterTextSplitter(chunk_size=5000, chunk_overlap=500)
