@@ -112,9 +112,18 @@ if uploaded_files:
         )
         st.markdown("**Assistant:** " + result["answer"])
         st.markdown("*Chat History:*")
-        for msg in chat_history.messages:
-            role = "You" if msg.type == "human" else "Assistant"
-            st.markdown(f"*{role}: {msg.content}*")
+        
+        styled_chat = "<div style='background-color:#f0f0f0; padding:10px; font-family:monospace;'>"
+        for message in chat_history:
+            role = "You" if message["role"] == "user" else "Assistant"
+            styled_chat += f"<strong>{role}:</strong> {message['content']}<br><br>"
+        styled_chat += "</div>"
+
+        st.markdown(styled_chat, unsafe_allow_html=True)
+
+        # for msg in chat_history.messages:
+        #     role = "You" if msg.type == "human" else "Assistant"
+        #     st.markdown(f"*{role}: {msg.content}*")
 
     # Clean up files after processing
     for path in saved_file_paths:
